@@ -1,0 +1,35 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - bim360scrape
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: https://bim360container.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_455888c0c02e46b58de94f337a85094a }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_5f860e86c6c74fcf84b382d9651f9195 }}
+
+    - run: |
+        docker build . -t bim360container.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_455888c0c02e46b58de94f337a85094a }}/selenium:${{ github.sha }}
+        docker push bim360container.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_455888c0c02e46b58de94f337a85094a }}/selenium:${{ github.sha }}
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'bim360scrape'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8ad9f25897484fc4ab9e0528cc3bc687 }}
+        images: 'bim360container.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_455888c0c02e46b58de94f337a85094a }}/selenium:${{ github.sha }}'
