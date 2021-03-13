@@ -1,7 +1,7 @@
 import datetime
 import logging
-from client import Client, Client_two_legged
-from  core import update_project_list, update_project_issues, update_users, update_companies
+from .client import Client, Client_two_legged
+from .core import update_project_list, update_project_issues, update_users, update_companies
 import azure.functions as func
 
 logger = logging.getLogger('name')

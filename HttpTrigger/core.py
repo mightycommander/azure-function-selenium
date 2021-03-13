@@ -4,10 +4,10 @@ Email: Jaime.badiolaramos@gmail.com
 Date: 2021-01-22
 '''
 
-from client import Client
+from .client import Client
 import pandas as pd
-from db_utils import push_df_to_db, query_db, flatten
-from forge import ForgeApp
+from .db_utils import push_df_to_db, query_db, flatten
+from .forge import ForgeApp
 import re
 import logging
 

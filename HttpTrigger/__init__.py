@@ -1,7 +1,7 @@
 import datetime
 import logging
-from client import Client, Client_two_legged
-from  core import update_project_list, update_project_issues, update_users, update_companies
+from .client import Client, Client_two_legged
+from .core import update_project_list, update_project_issues, update_users, update_companies
 import azure.functions as func
 
 logger = logging.getLogger('name')
@@ -10,7 +10,7 @@ sh = logging.StreamHandler()
 sh.setLevel(logging.INFO)
 logger.addHandler(sh)
 
-def main(): #req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request. 11:38')
 
     client = Client
@@ -37,8 +37,9 @@ def main(): #req: func.HttpRequest) -> func.HttpResponse:
     update_companies(client_users)
 
     return func.HttpResponse(
-             str(link_list),
-             status_code=200
+        # str(link_list),
+        "This HTTP triggered function executed successfully.",
+        status_code=200
     )
 
-main()
+# main()

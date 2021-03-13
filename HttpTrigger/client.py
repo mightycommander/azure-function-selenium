@@ -12,7 +12,7 @@ Client = ForgeApp(
     ,"hpvc6MpeybnyYG1c"
     ,hub_id="b.e7939612-1ad1-4f49-b4d7-6e85aee718a8"
     ,three_legged=True
-    ,redirect_uri='https://forge-test.azurewebsites.net'
+    ,redirect_uri='https://bim360scrape.azurewebsites.net'
     ,username='jamieramos@reds10.com'
     ,password='Cax49398'
     ,grant_type="implicit"
@@ -23,7 +23,7 @@ Client_two_legged = ForgeApp(
     ,"hpvc6MpeybnyYG1c"
     ,hub_id="b.e7939612-1ad1-4f49-b4d7-6e85aee718a8"
     ,three_legged=False
-    ,redirect_uri='https://forge-test.azurewebsites.net'
+    ,redirect_uri='https://bim360scrape.azurewebsites.net'
     ,username='jamieramos@reds10.com'
     ,password='Cax49398'
     ,grant_type="implicit")
