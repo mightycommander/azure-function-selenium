@@ -1,7 +1,7 @@
 import datetime
 import logging
 from .client import Client, Client_two_legged
-from .core import update_project_list, update_project_issues, update_users, update_companies
+from .core import update_project_list, update_project_issues, update_users, update_companies, update_project_meta_list
 import azure.functions as func
 
 logger = logging.getLogger('name')
@@ -15,6 +15,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     client = Client
 
+    client_users = Client_two_legged
+    client_users.get_projects()
+
+    update_project_meta_list(client_users)
     # logging.info('Python ti
     # mer trigger function ran at %s', utc_timestamp)
 
@@ -42,4 +46,3 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         status_code=200
     )
 
-# main()

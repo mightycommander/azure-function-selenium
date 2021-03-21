@@ -1,7 +1,7 @@
 import datetime
 import logging
 from .client import Client, Client_two_legged
-from .core import update_project_list, update_project_issues, update_users, update_companies
+from .core import update_project_list, update_project_issues, update_users, update_companies, update_project_meta_list
 import azure.functions as func
 
 logger = logging.getLogger('name')
@@ -20,6 +20,10 @@ def main(mytimer: func.TimerRequest) -> None:
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 
     client = Client
+    client_users = Client_two_legged
+    client_users.get_projects()
+
+    update_project_meta_list(client_users)
 
     # logging.info('Python ti
     # mer trigger function ran at %s', utc_timestamp)

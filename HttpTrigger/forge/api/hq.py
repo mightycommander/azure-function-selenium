@@ -104,7 +104,7 @@ class HQ(ForgeBase):
 
     @_validate_token
     def get_project(self, project_id):
-        url = "{}/accounts/{}/projects/{}".format(
+        url = "{}/accounts/{}/projects/{}?limit=100".format(
             HQ_V1_URL, self.account_id, project_id
         )
         data, _ = self.session.request(

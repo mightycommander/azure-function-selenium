@@ -41,6 +41,21 @@ def update_project_list(client):
 
     return None
 
+def update_project_meta_list(client):
+    table = 'bim_project_meta'
+    df = pd.DataFrame()
+
+    for project in client.projects:
+        df = df.append(project.data['admin'], ignore_index=True)
+    
+    logger.info(df.head())
+    logger.info(df.columns)
+    df['value'].fillna(0, inplace=True)
+    df = df.fillna('NULL')#.replace(False, 'FALSE').replace(True, 'TRUE')
+    push_df_to_db(df.to_dict('records'), table=f'reds10_database.data_imports.{table}', overwrite=True)
+
+    return None
+
 def update_project_issues(client):
     table = 'bim_issues'
     df2 = pd.DataFrame()
